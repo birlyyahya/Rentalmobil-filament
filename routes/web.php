@@ -3,6 +3,7 @@
 use App\Filament\Members\Resources\CustomerResource;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\KatalogController;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Passwords\Confirm;
 use App\Livewire\Auth\Passwords\Email;
@@ -26,12 +27,16 @@ Route::view('/', 'welcome')->name('home');
 
 
 Route::middleware('guest')->group(function () {
-    Route::get('login', Login::class)
-        ->name('login');
+    // Route::get('login', Login::class)
+    //     ->name('login');
 
-    Route::get('register', Register::class)
-        ->name('register');
+    // Route::get('register', Register::class)
+    //     ->name('register');
 });
+
+Route::get('/search', [KatalogController::class,'index'])->name('search');
+Route::get('/katalog/{id}/{tanggalAmbil}/{tanggalKembali}/{waktu}', [KatalogController::class, 'show'])->name('katalog.show');
+
 
 Route::get('password/reset', Email::class)
     ->name('password.request');

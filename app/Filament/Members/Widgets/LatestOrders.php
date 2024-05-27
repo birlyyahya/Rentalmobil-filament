@@ -2,12 +2,14 @@
 
 namespace App\Filament\Members\Widgets;
 
+use App\Filament\Members\Pages\EditProfile;
 use Filament\Tables;
 use App\Models\Customer;
 use App\Models\Reservasi;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Filament\Tables\Columns\TextColumn\TextColumnSize;
 
@@ -38,13 +40,13 @@ class LatestOrders extends BaseWidget
                         return ucwords($state);
                     })
                     ->size(TextColumnSize::Large)
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'menunggu' => 'info',
                         'diproses' => 'warning',
                         'diterima' => 'success',
                         'ditolak' => 'danger',
                     })
-                    ->icon(fn (string $state): string => match ($state) {
+                    ->icon(fn(string $state): string => match ($state) {
                         'menunggu' => 'heroicon-c-sparkles',
                         'diproses' => 'heroicon-c-arrow-path',
                         'diterima' => 'heroicon-c-check-circle',
@@ -57,7 +59,7 @@ class LatestOrders extends BaseWidget
                     ->formatStateUsing(function ($state) {
                         return Str::upper($state);
                     })
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'paid' => 'success',
                         'unpaid' => 'danger',
                         'expired' => 'gray',
@@ -87,6 +89,10 @@ class LatestOrders extends BaseWidget
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->actions([
+                Tables\Actions\Action::make('open')
+                    ->url(EditProfile::getUrl()),
             ]);
     }
 }
