@@ -1,6 +1,6 @@
 
     {{-- testimoni --}}
-    <section class="scroll-mt-24 o" id="pricing">
+    <section class="scroll-mt-24 o" id="testimoni">
         <div class="h-full max-w-6xl px-8 pb-24 mx-auto md:px-12 lg:px-32">
             <section class="bg-white">
                 <div class="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 lg:px-8 lg:py-16">
@@ -193,7 +193,6 @@
                                 </p>
                             </blockquote>
                         </div>
-
                     </div>
                 </div>
             </section>

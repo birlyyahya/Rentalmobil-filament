@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ use Livewire\Component;
 class Register extends Component
 {
     /** @var string */
-    public $name = '';
+    public $nama_lengkap = '';
 
     /** @var string */
     public $email = '';
@@ -23,25 +24,49 @@ class Register extends Component
     /** @var string */
     public $passwordConfirmation = '';
 
+    /** @var string */
+    public $jenis_identitas = '';
+
+    /** @var integer */
+    public $no_identitas = '';
+
+    /** @var string */
+    public $telp = '';
+
+    /** @var string */
+    public $alamat = '';
+
     public function register()
     {
-        $this->validate([
-            'name' => ['required'],
-            'email' => ['required', 'email', 'unique:users'],
+        $data = $this->validate([
+            'nama_lengkap' => ['required'],
+            'email' => ['required', 'email', 'unique:customers'],
             'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+            'no_identitas' => ['required','min:12', 'unique:customers'],
+            'alamat' => ['required'],
+            'telp' => ['required', 'numeric']
         ]);
 
-        $user = User::create([
+
+        $user = Customer::create([
+            'nama_lengkap' => $this->nama_lengkap,
             'email' => $this->email,
-            'name' => $this->name,
             'password' => Hash::make($this->password),
+            'jenis_identitas' => $this->jenis_identitas,
+            'no_identitas' => $this->no_identitas,
+            'telp' => $this->telp,
+            'alamat' => $this->alamat,
+            'avatar' => 'customer_avatar/avatardefault.png',
+            'status' => 'active',
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user, true);
+        Auth::guard('members')->login($user, true);
 
-        return redirect()->intended(route('home'));
+        session()->regenerate();
+
+        return redirect()->url('members');
     }
 
     public function render()

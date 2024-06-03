@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ReservasiResource\RelationManagers;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Mobil;
+use App\Models\Driver;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Support\RawJs;
@@ -33,7 +34,11 @@ class ReservasiDetailsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('durasi_sewa')
                     ->suffix('Hari')
                     ->required(),
-
+                Forms\Components\Select::make('driver_id')
+                    ->relationship('driver', 'nama_driver')
+                    ->options(function () {
+                        return Driver::where('status', 'ready')->pluck('nama_driver', 'id');
+                    }),
                 Forms\Components\ToggleButtons::make('status_pengembalian')
                     ->options([
                         'menunggu' => 'Menunggu',

@@ -9,6 +9,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\ServiceProvider;
 use Filament\Notifications\Notification;
 use Illuminate\Validation\ValidationException;
+use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
+        $this->app->singleton(
+            LoginResponse::class,
+            \App\Http\Responses\LoginResponse::class
+        );
     }
 
     /**
@@ -29,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('pagination::default');
 
         Paginator::defaultSimpleView('pagination::simple-default');
+
 
         Page::$reportValidationErrorUsing = function (ValidationException $exception) {
             Notification::make()

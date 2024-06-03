@@ -40,13 +40,13 @@ class LatestOrders extends BaseWidget
                         return ucwords($state);
                     })
                     ->size(TextColumnSize::Large)
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'menunggu' => 'info',
                         'diproses' => 'warning',
                         'diterima' => 'success',
                         'ditolak' => 'danger',
                     })
-                    ->icon(fn(string $state): string => match ($state) {
+                    ->icon(fn (string $state): string => match ($state) {
                         'menunggu' => 'heroicon-c-sparkles',
                         'diproses' => 'heroicon-c-arrow-path',
                         'diterima' => 'heroicon-c-check-circle',
@@ -59,7 +59,7 @@ class LatestOrders extends BaseWidget
                     ->formatStateUsing(function ($state) {
                         return Str::upper($state);
                     })
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'paid' => 'success',
                         'unpaid' => 'danger',
                         'expired' => 'gray',
@@ -92,7 +92,7 @@ class LatestOrders extends BaseWidget
             ])
             ->actions([
                 Tables\Actions\Action::make('open')
-                    ->url(EditProfile::getUrl()),
+                    ->url(fn (Reservasi $record): string => route('invoice.show', ['invoice' => $record->kode_transaksi])),
             ]);
     }
 }

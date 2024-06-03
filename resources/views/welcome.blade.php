@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navigation.navbar />
+    @livewire('component.navbar')
 
     {{-- Hero title --}}
-    <section
+    <section id="home"
         class="bg-[url(https://images.unsplash.com/photo-1604014237800-1c9102c219da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80)] bg-cover bg-center bg-fixed bg-no-repeat relative">
         <div class="bg-black/25">
 
@@ -63,41 +63,8 @@
         </div>
     </section>
 
-
-
     {{-- Best Deals --}}
-    <link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" />
 
-    <script type="module">
-        import KeenSlider from 'https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm'
-
-        const keenSlider = new KeenSlider(
-            '#keen-slider', {
-                loop: true,
-                slides: {
-                    origin: 'center',
-                    perView: 1.25,
-                    spacing: 16,
-                },
-                breakpoints: {
-                    '(min-width: 1024px)': {
-                        slides: {
-                            origin: 'auto',
-                            perView: 2.5,
-                            spacing: 32,
-                        },
-                    },
-                },
-            },
-            []
-        )
-
-        const keenSliderPrevious = document.getElementById('keen-slider-previous')
-        const keenSliderNext = document.getElementById('keen-slider-next')
-
-        keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
-        keenSliderNext.addEventListener('click', () => keenSlider.next())
-    </script>
     <livewire:homepage.mobil-offer-today />
 
     @livewire('homepage.testimonial')
@@ -179,4 +146,40 @@
     </section>
 
     <x-navigation.footer />
+@endsection
+
+@section('script')
+    <link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" />
+
+    <script type="module">
+        import KeenSlider from 'https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm'
+
+        const keenSlider = new KeenSlider(
+            '#keen-slider', {
+                loop: true,
+                slides: {
+                    origin: 'center',
+                    perView: 1.25,
+                    spacing: 16,
+                },
+                breakpoints: {
+                    '(min-width: 1024px)': {
+                        slides: {
+                            origin: 'auto',
+                            perView: 2.5,
+                            spacing: 32,
+                        },
+                    },
+                },
+            },
+            []
+        )
+
+        const keenSliderPrevious = document.getElementById('keen-slider-previous')
+        const keenSliderNext = document.getElementById('keen-slider-next')
+
+        keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
+        keenSliderNext.addEventListener('click', () => keenSlider.next())
+
+    </script>
 @endsection

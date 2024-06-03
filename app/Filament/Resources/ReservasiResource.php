@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ReservasiResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn\TextColumnSize;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\ReservasiDetailsResource\RelationManagers;
 use App\Filament\Resources\ReservasiResource\RelationManagers\ReservasiDetailsRelationManager;
 
@@ -62,18 +63,21 @@ class ReservasiResource extends Resource
                         'diproses' => 'Diproses',
                         'diterima' => 'Diterima',
                         'ditolak' => 'Ditolak',
+                        'dibatalkan' => 'Dibatalkan',
                     ])
                     ->colors([
                         'menunggu' => 'info',
                         'diproses' => 'warning',
                         'diterima' => 'success',
                         'ditolak' => 'danger',
+                        'dibatalkan' => 'danger',
                     ])
                     ->icons([
                         'menunggu' => 'heroicon-c-sparkles',
                         'diproses' => 'heroicon-c-arrow-path',
                         'diterima' => 'heroicon-c-check-circle',
                         'ditolak' => 'heroicon-m-x-circle',
+                        'dibatalkan' => 'heroicon-m-x-circle',
                     ])
                     ->inline(),
                 Forms\Components\Select::make('status_pembayaran')
@@ -84,8 +88,10 @@ class ReservasiResource extends Resource
                         'refund' => 'Refund',
                     ])
                     ->selectablePlaceholder(false),
-                Forms\Components\TextInput::make('keterangan')
+                Forms\Components\Textarea::make('keterangan')
                     ->required()
+                    ->rows(6)
+                    ->cols(10)
                     ->formatStateUsing(function ($state) {
                         $keterangan = json_decode($state, true);
                         if ($keterangan == !NULL) {
@@ -93,8 +99,7 @@ class ReservasiResource extends Resource
                         } else {
                             return $state;
                         }
-                    })
-                    ->maxLength(255),
+                    }),
             ]);
     }
 
@@ -113,7 +118,8 @@ class ReservasiResource extends Resource
                     )
                     ->searchable(),
                 Tables\Columns\TextColumn::make('customer.nama_lengkap')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('status_reservasi')
                     ->badge()
                     ->formatStateUsing(function ($state) {
@@ -125,12 +131,14 @@ class ReservasiResource extends Resource
                         'diproses' => 'warning',
                         'diterima' => 'success',
                         'ditolak' => 'danger',
+                        'dibatalkan' => 'danger',
                     })
                     ->icon(fn (string $state): string => match ($state) {
                         'menunggu' => 'heroicon-c-sparkles',
                         'diproses' => 'heroicon-c-arrow-path',
                         'diterima' => 'heroicon-c-check-circle',
                         'ditolak' => 'heroicon-m-x-circle',
+                        'dibatalkan' => 'heroicon-m-x-circle',
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status_pembayaran')
@@ -149,18 +157,32 @@ class ReservasiResource extends Resource
                 Tables\Columns\TextColumn::make('total_bayar')
                     ->numeric()
                     ->money('IDR')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->searchable()
-                    ->limit(30)
-                    ->formatStateUsing(function ($state) {
+                    ->wrap()
+                    ->formatStateUsing(function (string $state): string {
+                        // Split the state by comma to get individual entries
+                        $entries = explode(',', $state);
 
-                        $keterangan = json_decode($state, true);
-                        if ($keterangan == !NULL) {
-                            return $keterangan['type'] . '-' . $keterangan['number'] . ',' . $keterangan['name'] . ' ' . $keterangan['expirationDate'];
-                        } else {
-                            return $state;
+                        // Initialize an array to hold formatted entries
+                        $formattedEntries = [];
+
+                        // Process each entry
+                        foreach ($entries as $entry) {
+                            // Trim any extra whitespace
+                            $entry = trim($entry);
+
+                            // Replace colon with ': ' for better readability
+                            $entry = str_replace(':', ': ', $entry);
+
+                            // Add the formatted entry to the array
+                            $formattedEntries[] = '• ' . $entry;
                         }
+
+                        // Join the formatted entries with a new line for each entry
+                        return implode("\n", $formattedEntries);
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -181,6 +203,7 @@ class ReservasiResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    FilamentExportBulkAction::make('Export')
                 ]),
             ]);
     }

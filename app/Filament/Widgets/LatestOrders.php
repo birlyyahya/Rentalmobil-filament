@@ -49,12 +49,14 @@ class LatestOrders extends BaseWidget
                         'diproses' => 'warning',
                         'diterima' => 'success',
                         'ditolak' => 'danger',
+                        'dibatalkan' => 'danger',
                     })
                     ->icon(fn (string $state): string => match ($state) {
                         'menunggu' => 'heroicon-c-sparkles',
                         'diproses' => 'heroicon-c-arrow-path',
                         'diterima' => 'heroicon-c-check-circle',
                         'ditolak' => 'heroicon-m-x-circle',
+                        'dibatalkan' => 'heroicon-m-x-circle',
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status_pembayaran')

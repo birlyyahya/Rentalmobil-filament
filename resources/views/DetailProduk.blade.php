@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navigation.navbar />
+    @livewire('component.navbar')
+
     <section x-data="{
         open: false
     }">
-        <div class="h-full px-8 pt-24 mx-auto max-w-8xl md:px-12 lg:px-32">
+        <div class="h-full px-8 pt-24 pb-20 mx-auto max-w-8xl md:px-12 lg:px-32">
             <div class="grid grid-cols-1 gap-4 rounded-lg shadow-md bg-neutral-100 lg:grid-cols-3 lg:gap-8 ">
                 <div class="h-32 p-5 bg-white rounded-r-full shadow-md lg:col-span-2">
                     <h2 class="font-bold tracking-normal text-1xl">Pilih kendaraan anda sekarang!</h2>
@@ -35,9 +36,9 @@
                             xml:space="preserve">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M505.749,475.587l-145.6-145.6c28.203-34.837,45.184-79.104,45.184-127.317c0-111.744-90.923-202.667-202.667-202.667
-                                                                                                                                                                                                                                               S0,90.925,0,202.669s90.923,202.667,202.667,202.667c48.213,0,92.48-16.981,127.317-45.184l145.6,145.6
-                                                                                                                                                                                                                                               c4.16,4.16,9.621,6.251,15.083,6.251s10.923-2.091,15.083-6.251C514.091,497.411,514.091,483.928,505.749,475.587z
-                                                                                                                                                                                                                                               M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       S0,90.925,0,202.669s90.923,202.667,202.667,202.667c48.213,0,92.48-16.981,127.317-45.184l145.6,145.6
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       c4.16,4.16,9.621,6.251,15.083,6.251s10.923-2.091,15.083-6.251C514.091,497.411,514.091,483.928,505.749,475.587z
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z">
                             </path>
                         </svg>
                         <span class="text-sm font-medium"> Ubah Pencarian </span>
@@ -465,11 +466,11 @@
                 <h2 class="text-3xl font-bold">Pilihan Mobil Anda</h2>
                 <p class="text-sm">Next... Proses Pemesanan </p>
                 <div class="grid grid-cols-3">
-                    <div class="mt-4 mr-2 overflow-hidden bg-gray-200">
+                    <div class="mt-4 mr-2 overflow-hidden">
                         <div class="w-full h-2 bg-blue-500 "></div>
                     </div>
                     <div class="mt-4 mr-2 overflow-hidden bg-gray-200">
-                        <div class="w-full h-2 "></div>
+                        <div class="w-full h-2 bg-blue-500"></div>
                     </div>
                     <div class="mt-4 overflow-hidden bg-gray-200 ">
                         <div class="w-full h-2"></div>
@@ -485,12 +486,6 @@
                     </svg>
                     <div><b>Success alert</b> Lorem ipsum dolor sit amet. Internos reprehenderit perspiciatis commodi et
                         omnis impedit.</div>
-                    <button class="ml-auto" x-on:click="showAlert = false">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                            <path
-                                d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-                        </svg>
-                    </button>
                 </div>
                 <div class="grid grid-cols-2 gap-5 mt-10">
                     @livewire('component.gallery-cars')
@@ -498,10 +493,11 @@
                         <p class="text-xl font-bold">{{ $mobil->nama_mobil }}</p>
                         <div class="flex mt-2">
                             <hr class="w-40 h-1 my-3 mr-2 border-0 rounded-lg bg-neutral-300" />
-                            <hr class="w-10 h-1 mx-2 my-3 bg-yellow-300 border-0 rounded-lg" />
+                            <hr class="w-8 h-1 mx-2 my-3 bg-yellow-300 border-0 rounded-lg" />
                             <hr class="w-5 h-1 mx-2 my-3 border-0 rounded-lg bg-neutral-300" />
                         </div>
-                        <div class="mt-2 text-sm ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+                        <div class="mt-2 text-sm text-neutral-600">Lorem, ipsum dolor sit amet consectetur adipisicing
+                            elit. Veritatis
                             vitae
                             doloremque vel dolore quibusdam omnis.</div>
                         <div class="grid grid-cols-3 gap-4 my-10">
@@ -553,17 +549,327 @@
                                 <label for="">{{ $mobil->Kategori->kategori_mobil }}</label>
                             </div>
                         </div>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia quo iusto, corporis sit facere
+                        <p class="text-sm text-neutral-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
+                            quo iusto, corporis sit facere
                             modi vitae hic quas officia nobis?</p>
                     </div>
                 </div>
+                <div class="w-full h-1 mt-20 rounded-lg bg-neutral-200"></div>
 
+                {{-- testimoni --}}
+
+                <div class="p-5 testimoni">
+                    <link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" />
+
+                    <script type="module">
+                        import KeenSlider from 'https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm'
+
+                        const keenSlider = new KeenSlider(
+                            '#keen-slider', {
+                                loop: true,
+                                slides: {
+                                    origin: 'center',
+                                    perView: 1.25,
+                                    spacing: 16,
+                                },
+                                breakpoints: {
+                                    '(min-width: 1024px)': {
+                                        slides: {
+                                            origin: 'auto',
+                                            perView: 2.5,
+                                            spacing: 32,
+                                        },
+                                    },
+                                },
+                            },
+                            []
+                        )
+
+                        const keenSliderPrevious = document.getElementById('keen-slider-previous')
+                        const keenSliderNext = document.getElementById('keen-slider-next')
+
+                        keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
+                        keenSliderNext.addEventListener('click', () => keenSlider.next())
+                    </script>
+
+                    <div class="items-end justify-between sm:flex sm:pe-6 lg:pe-8">
+                        <h2 class="max-w-xl text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+                            Reviews from our customers
+                        </h2>
+
+                        <div class="flex gap-4 mt-8 lg:mt-0">
+                            <button aria-label="Previous slide" id="keen-slider-previous"
+                                class="p-3 transition border rounded-full border-rose-600 text-rose-600 hover:bg-rose-600 hover:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5 rtl:rotate-180">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                            </button>
+
+                            <button aria-label="Next slide" id="keen-slider-next"
+                                class="p-3 transition border rounded-full border-rose-600 text-rose-600 hover:bg-rose-600 hover:text-white">
+                                <svg class="size-5 rtl:rotate-180" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="keen-slider" class="max-w-3xl mt-10 keen-slider">
+                        @forelse ($review as $test)
+                            <div class="keen-slider__slide">
+                                <blockquote class="p-6 rounded-lg shadow-sm bg-gray-50 sm:p-8">
+                                    <div class="flex items-center gap-4">
+                                        <img alt=""
+                                            src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+                                            class="object-cover rounded-full size-14" />
+                                        <div>
+                                            <div class="flex gap-0.5 text-green-500">
+                                                @for ($i = 0; $i < $test->rating; $i++)
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path
+                                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                @endfor
+                                            </div>
+                                            <p class="mt-0.5 text-sm font-medium text-gray-900">
+                                                {{ $test->customer->nama_lengkap }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4 text-sm text-gray-700">
+                                        {{ $test->keterangan }}
+                                    </p>
+                                </blockquote>
+                            </div>
+                        @empty
+                            <h2 class="text-lg font-bold text-center text-neutral-400">Belum Ada Review</h2>
+                        @endforelse
+                    </div>
+                </div>
+
+                {{-- Kebijakan --}}
+                <div class="w-full h-1 mt-20 rounded-lg bg-neutral-200"></div>
+                <section>
+                    <div class="divide-y divide-gray-100">
+                        <details class="group" open>
+                            <summary
+                                class="flex items-center justify-between py-4 text-lg font-medium list-none cursor-pointer text-secondary-900">
+                                <h1 id="Syarat dan Ketentuan" class="font-bold text-md">
+                                    Harga Termasuk?
+                                </h1>
+                                <div class="text-secondary-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="block w-5 h-5 transition-all duration-300 group-open:rotate-180">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="max-w-screen-xl py-2 sm:py-8 lg:py-10">
+                                <div class="grid grid-cols-1 gap-y-8 lg:grid-cols-3 lg:items-center lg:gap-x-16">
+                                    <div class="grid grid-cols-2 col-span-2 gap-4 text-sm text-gray-500 sm:grid-cols-2">
+                                        <p>Lorem ipsum dolor sit amet.</p>
+                                        <p>Lorem ipsum dolor sit amet.</p>
+                                        <p>Lorem ipsum dolor sit amet.</p>
+                                        <p>Lorem ipsum dolor sit amet.</p>
+                                        <p>Lorem ipsum dolor sit amet.</p>
+                                        <p>Lorem ipsum dolor sit amet.</p>
+                                    </div>
+
+                                    <div class="max-w-lg mx-auto text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
+                                        <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                            alt="" class="object-cover rounded-lg size-full" />
+
+                                    </div>
+                                </div>
+                                <div class="flex p-4 mt-5 text-sm text-yellow-500 rounded-md bg-yellow-50" x-cloak
+                                    x-show="showAlert" x-data="{ showAlert: true }">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                        class="flex-shrink-0 w-5 h-5 mr-3">
+                                        <path fill-rule="evenodd"
+                                            d="M19 10.5a8.5 8.5 0 11-17 0 8.5 8.5 0 0117 0zM8.25 9.75A.75.75 0 019 9h.253a1.75 1.75 0 011.709 2.13l-.46 2.066a.25.25 0 00.245.304H11a.75.75 0 010 1.5h-.253a1.75 1.75 0 01-1.709-2.13l.46-2.066a.25.25 0 00-.245-.304H9a.75.75 0 01-.75-.75zM10 7a1 1 0 100-2 1 1 0 000 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <div><b>Harap Dicatat</b> Harga belum termasuk dalam biaya supir</div>
+                                </div>
+                            </div>
+                        </details>
+                        <details class="group">
+                            <summary
+                                class="flex items-center justify-between py-4 text-lg font-medium list-none cursor-pointer text-secondary-900">
+                                <h1 id="Syarat dan Ketentuan" class="font-bold text-md">
+                                    Syarat dan Ketentuan
+                                </h1>
+                                <div class="text-secondary-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="block w-5 h-5 transition-all duration-300 group-open:rotate-180">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="prose-sm prose text-gray-500">
+                                <p>Get to Know Me Better</p>
+                                <ul>
+                                    <li>
+                                        I was born in the vibrant city of London in the 1980s, at St Thomas’
+                                        Hospital Medical School. My cultural background is a beautiful blend
+                                        of Italian from my father's side and Spanish from my mother's side.
+                                    </li>
+                                    <li>
+                                        My childhood was split between the enchanting landscapes of northern
+                                        Italy and the sunny coasts of southern Spain.
+                                    </li>
+                                    <li>
+                                        Growing up, I called various places home, including Borgosesia in
+                                        Vercelli, Italy, Gorliz and Bilbao in Spain, and Torrevieja in
+                                        Alicante, Spain.
+                                    </li>
+                                    <li>
+                                        Since a young age, I've been captivated by the art of drawing cars,
+                                        allowing my imagination to roam freely on paper.
+                                    </li>
+                                    <li>
+                                        Surfing has been a lifelong passion of mine, instilling in me a deep
+                                        connection with nature and the ocean's boundless energy.
+                                    </li>
+                                    <li>
+                                        Being raised in a multilingual environment, I am fluent in Castilian
+                                        Spanish, English, Italian, and even Swedish, enriching my cultural
+                                        experiences and communication skills.
+                                    </li>
+                                    <li>
+                                        During my youth, I served as a lifeguard on the picturesque Spanish
+                                        coast, embracing the responsibility of ensuring beach safety and
+                                        fostering a sense of community.
+                                    </li>
+                                    <li>
+                                        In my early twenties, I embarked on a journey of self-discovery and
+                                        adventure, moving to Harrogate in the United Kingdom to explore life
+                                        in a different cultural setting.
+                                    </li>
+                                    <li>
+                                        Seeking the warmth and familiarity of my homeland, I eventually
+                                        returned to Spain, cherishing the sunshine and vibrant lifestyle
+                                        that I missed dearly.
+                                    </li>
+                                    <li>
+                                        The desire for new experiences and challenges led me and my wife to
+                                        relocate to the enchanting city of Helsinki, Finland, in 2011, where
+                                        we discovered a thriving tech scene and a welcoming community.
+                                    </li>
+                                    <li>
+                                        Currently, I reside in the picturesque Åland Islands, surrounded by
+                                        the serene beauty of nature and the innovative spirit of the local
+                                        community.
+                                    </li>
+                                    <li>
+                                        My greatest joys in life come from being a dedicated father and
+                                        husband, cherishing every moment spent with my loving family.
+                                    </li>
+                                    <li>
+                                        My journey into web development was sparked by a simple curiosity –
+                                        tweaking settings on my Android phone ignited a passion for coding
+                                        and design that continues to drive me forward.
+                                    </li>
+                                    <li>
+                                        In 2018, I launched my first project, Colors and Fonts, a platform
+                                        dedicated to inspiring designers and developers with beautiful color
+                                        palettes and typography combinations.
+                                    </li>
+                                    <li>
+                                        Despite facing challenges, including working on projects with a
+                                        failing laptop screen, I persevered and saw two of my creations
+                                        acquired in 2022, fueling my determination and ambition.
+                                    </li>
+                                    <li>
+                                        The year 2022 marked the beginning of new ventures, as I founded
+                                        Lexington Themes and Windstatic, platforms aimed at empowering
+                                        creators and simplifying web development processes. Both projects
+                                        officially launched in February 2023, marking a significant
+                                        milestone in my journey.
+                                    </li>
+                                    <li>
+                                        I am deeply inspired by simplicity and clarity in design, striving
+                                        to incorporate these principles into every aspect of my work and
+                                        life.
+                                    </li>
+                                    <li>
+                                        Consistency has been my guiding principle, shaping my approach to
+                                        web development, project management, and personal growth. It serves
+                                        as a steadfast beacon, ensuring that I remain focused and committed
+                                        to my goals amidst life's ever-changing landscape.
+                                    </li>
+                                </ul>
+                                <p>
+                                    Reflecting on my journey from the bustling cities of Italy and Spain
+                                    to the tranquil shores of the Åland Islands, I am grateful for the
+                                    experiences that have shaped me into the person I am today. My passion
+                                    for design, development, and entrepreneurship continues to drive me
+                                    forward, propelling me towards new horizons and creative endeavors.
+                                </p>
+                            </div>
+                        </details>
+                        <details class="group">
+                            <summary
+                                class="flex items-center justify-between py-4 text-lg font-medium list-none cursor-pointer text-secondary-900">
+                                <h1 id="Syarat dan Ketentuan" class="font-bold text-md">
+                                    Kebijakan Pembatalan
+                                </h1>
+                                <div class="text-secondary-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="block w-5 h-5 transition-all duration-300 group-open:rotate-180">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="pb-4 text-secondary-500">This is the third item's accordion body.</div>
+                        </details>
+                    </div>
+                </section>
+                {{-- <form wire:submit.prevent="submit">
+                    <div x-data="{ switchOn: false }" class="text-end">
+                        <div class="flex space-y-5">
+                            <input id="thisId" type="checkbox" name="switch" class="hidden" :checked="switchOn">
+
+                            <label @click="$refs.switchButton.click(); $refs.switchButton.focus()" :id="$id('switch')"
+                                :class="{ 'text-blue-600': switchOn, 'text-gray-400': !switchOn }" class="text-sm select-none"
+                                x-cloak>
+                                Dengan mengklik tombol ini, Anda setuju dengan syarat & ketentuan serta kebijakan privasi
+                            </label>
+                            <button x-ref="switchButton" type="button" @click="switchOn = ! switchOn"
+                                :class="switchOn ? 'bg-blue-600' : 'bg-neutral-200'"
+                                class="relative inline-flex h-6 py-0.5 ml-4 focus:outline-none rounded-full w-10" x-cloak>
+                                <span :class="switchOn ? 'translate-x-[18px]' : 'translate-x-0.5'"
+                                    class="w-5 h-5 duration-200 ease-in-out bg-white rounded-full shadow-md"></span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="tanggalAmbil" wire:model="tanggalAmbil" value="{{ $keyword['tanggalAmbil'].''.$keyword['waktu'] }}">
+                        <input type="hidden" id="tanggalKembali" wire:model="tanggalKembali" value="{{ $keyword['tanggalKembali'].''.$keyword['waktu'] }}">
+                        <input type="hidden" id="mobil" wire:model="mobilid" value="{{ $mobil->id }}">
+                        <button :disabled="!switchOn"
+                            class="h-12 mt-10 font-medium duration-200 bg-gray-100 rounded-md w-80 gap-3py-3 enabled:hover:bg-blue-600 disabled:opacity-75 enabled:bg-blue-500 enabled:text-white enabled:hover:text-white focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            aria-describedby="planDescription" aria-label="Button" type="submit">
+                            Lanjutkan Pesanan
+                        </button>
+                    </div>
+                </form> --}}
+                @livewire('detail-produk-form', ['keyword' => $keyword, 'mobils' => $mobil])
             </div>
-            <div class="p-5 mt-[7rem] sidebar">
+            <div class="row-span-2 mt-[5rem] p-5 sidebar">
                 <div class="flex flex-row border rounded-lg shadow-sm">
                     <div class="h-full p-5">
                         <!-- Timeline -->
-                        <div >
+                        <div>
                             <!-- Heading -->
                             <div class="my-2 ps-2 first:mt-0">
                                 <h3 class="text-xs font-medium text-gray-500 uppercase">
@@ -597,9 +903,12 @@
                                             <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z">
                                             </path>
                                             <polyline points="14 2 14 8 20 8"></polyline>
-                                            <line x1="16" x2="8" y1="13" y2="13"></line>
-                                            <line x1="16" x2="8" y1="17" y2="17"></line>
-                                            <line x1="10" x2="8" y1="9" y2="9"></line>
+                                            <line x1="16" x2="8" y1="13" y2="13">
+                                            </line>
+                                            <line x1="16" x2="8" y1="17" y2="17">
+                                            </line>
+                                            <line x1="10" x2="8" y1="9" y2="9">
+                                            </line>
                                         </svg>
                                         Hari pengambilan kendaraan
                                     </h3>
@@ -611,7 +920,7 @@
                                         <img class="flex-shrink-0 rounded-full size-4"
                                             src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8auto=format&fit=facearea&facepad=3&w=320&h=320&q=80"
                                             alt="Image Description">
-                                        James Collins
+                                        Birlyyahya
                                     </button>
                                 </div>
                                 <!-- End Right Content -->
@@ -645,7 +954,7 @@
                                         <img class="flex-shrink-0 rounded-full size-4"
                                             src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80"
                                             alt="Image Description">
-                                        James Collins
+                                        Birlyyahya
                                     </button>
                                 </div>
                                 <!-- End Right Content -->
@@ -655,7 +964,7 @@
                             <!-- Heading -->
                             <div class="my-2 ps-2 first:mt-0">
                                 <h3 class="text-xs font-medium text-gray-500 uppercase">
-                                {{ $keyword['tanggalKembali'] }}
+                                    {{ $keyword['tanggalKembali'] }}
                                 </h3>
                             </div>
                             <!-- End Heading -->
@@ -692,10 +1001,9 @@
                         <!-- End Timeline -->
                     </div>
                 </div>
-                <div class="flex flex-row border rounded-lg shadow-sm">
-
-                </div>
+                @livewire('component.rincian-harga', ['mobil' => $mobil])
             </div>
+        </div>
     </section>
 
     <x-navigation.footer />

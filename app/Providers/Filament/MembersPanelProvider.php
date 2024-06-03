@@ -8,6 +8,7 @@ use Filament\Widgets;
 use App\Models\Customer;
 use Filament\PanelProvider;
 use Filament\Facades\Filament;
+use App\Livewire\Auth\Register;
 use Filament\Support\Colors\Color;
 use Filament\Pages\Auth\EditProfile;
 use Filament\Navigation\NavigationItem;
@@ -32,10 +33,12 @@ class MembersPanelProvider extends PanelProvider
             ->id('members')
             ->path('members')
             ->login()
+            ->registration(Register::class)
             ->authGuard('members')
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->brandName('Berlian Rent Car Members')
             ->discoverPages(in: app_path('Filament/Members/Pages'), for: 'App\\Filament\\Members\\Pages')
             ->pages([
                 Pages\Dashboard::class,

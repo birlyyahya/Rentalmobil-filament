@@ -29,8 +29,8 @@ class ListReservasis extends ListRecords
                 ->badge(Reservasi::query()->where('status_reservasi', 'diterima')->count())
                 ->badgeColor('success'),
             'Cancelled' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('status_reservasi', 'diterima'))
-                ->badge(Reservasi::query()->where('status_reservasi', 'diterima')->count())
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status_reservasi', 'dibatalkan')->orWhere('status_reservasi','ditolak')->count())
+                ->badge(Reservasi::query()->where('status_reservasi', 'dibatalkan')->orWhere('status_reservasi','ditolak')->count())
                 ->badgeColor('danger'),
         ];
     }

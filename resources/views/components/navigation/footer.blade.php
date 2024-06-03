@@ -1,6 +1,6 @@
     {{-- footer --}}
     <footer>
-        <div class="h-full px-8 py-24 mx-auto max-w-8xl md:px-12 lg:px-32">
+        <div class="h-full px-8 pb-5 mx-auto max-w-8xl md:px-12 lg:px-32">
             <div class="pt-12 border-t">
                 <div class="border-gray-900 xl:grid xl:grid-cols-3 xl:gap-8">
                     <div class="text-black">

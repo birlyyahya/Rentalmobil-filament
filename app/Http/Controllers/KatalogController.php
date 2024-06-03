@@ -7,7 +7,10 @@ use Carbon\Carbon;
 use App\Models\Mobil;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class KatalogController extends Controller
 {
@@ -24,37 +27,14 @@ class KatalogController extends Controller
         $tanggalAmbil = Carbon::parse($tanggalAmbil);
         $tanggalKembali = Carbon::parse($tanggalKembali);
 
-        // Query untuk mencari mobil yang tersedia
-        $mobilTersedia = Mobil::leftJoin('reservasi_details', function ($join) use ($tanggalAmbil, $tanggalKembali) {
-            $join->on('mobils.id', '=', 'reservasi_details.mobil_id')
-                ->where(function ($query) use ($tanggalAmbil, $tanggalKembali) {
-                    $query->where(function ($query) use ($tanggalAmbil, $tanggalKembali) {
-                        $query->where('reservasi_details.tanggal_ambil', '<=', $tanggalKembali)
-                            ->where('reservasi_details.tanggal_kembali', '>=', $tanggalAmbil);
-                    })
-                        ->orWhere(function ($query) use ($tanggalAmbil) {
-                            $query->where('mobils.status', '=', 'away')
-                                ->where('reservasi_details.tanggal_kembali', '>=', $tanggalAmbil);
-                        });
-                });
+        $mobilTersedia = Mobil::where('status', '!=', 'away') // Pastikan mobil tidak dalam status 'away'
+        ->whereDoesntHave('reservasi_detail', function ($query) use ($tanggalAmbil, $tanggalKembali) {
+            // Pastikan tidak ada reservasi detail yang tumpang tindih dengan rentang tanggal yang dipilih
+            $query->where(function ($q) use ($tanggalAmbil, $tanggalKembali) {
+                $q->where('tanggal_kembali', '>=', $tanggalAmbil)
+                    ->where('tanggal_ambil', '<=', $tanggalKembali);
+            });
         })
-            ->where(function ($query) use ($tanggalAmbil, $tanggalKembali) {
-                $query->where('mobils.status', '=', 'ready')
-                    ->orWhere(function ($query) use (
-                        $tanggalAmbil,
-                        $tanggalKembali
-                    ) {
-                        $query->where('mobils.status', '=', 'away')
-                            ->where(function ($query) use ($tanggalAmbil, $tanggalKembali) {
-                                $query->whereNull('reservasi_details.id')
-                                    ->orWhere(function ($query) use ($tanggalAmbil, $tanggalKembali) {
-                                        $query->where('reservasi_details.tanggal_ambil', '>', $tanggalKembali)
-                                            ->orWhere('reservasi_details.tanggal_ambil', '=', $tanggalKembali);
-                                    });
-                            });
-                    });
-            })
-            ->select('mobils.*')
             ->get();
         $mobilTersedia->map(function ($mobil) use ($date) {
             // Hitung jumlah testimoni untuk mobil saat ini dan tambahkan ke dalam objek mobil
@@ -72,10 +52,12 @@ class KatalogController extends Controller
 
     public function show(mobil $id, $tanggalAmbil, $tanggalKembali, $waktu)
     {
+        $data = Testimoni::where('mobil_id', $id->id)->get();
         return view('DetailProduk', ['mobil' => $id, 'keyword' => [
             'tanggalAmbil'=> $tanggalAmbil,
             'tanggalKembali'=> $tanggalKembali,
             'waktu'=> $waktu,
-        ]]);
+
+        ],'review' => $data]);
     }
 }
