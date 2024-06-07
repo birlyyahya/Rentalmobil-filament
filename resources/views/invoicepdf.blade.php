@@ -56,11 +56,11 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td style="color: #ffffff; font-weight: bold; font-size: 1.5rem;">INVOICE #1290
+                                        <td style="color: #ffffff; font-weight: bold; font-size: 1.5rem;">INVOICE #{{ $kode_transaksi->kode_transaksi }}
                                         </td>
                                         <td
                                             style="color: #ffffff; font-weight: bold; font-size: 1.5rem; text-align: right;">
-                                            UNPAID</td>
+                                            {{ strtoupper($kode_transaksi->status_pembayaran) }}</td>
                                     </tr>
                                 </table>
                             </td>

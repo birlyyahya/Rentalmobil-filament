@@ -29,16 +29,15 @@
                     <button @click="open = ! open"
                         class="inline-flex items-center gap-2 px-8 py-3 text-white bg-indigo-600 border border-indigo-600 rounded hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
                         href="#">
-
                         <svg version="1.1" id="fi_622669" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" class=" size-5" fill="currentColor" stroke="none"
                             viewBox="0 0 512.005 512.005" style="enable-background:new 0 0 512.005 512.005;"
                             xml:space="preserve">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M505.749,475.587l-145.6-145.6c28.203-34.837,45.184-79.104,45.184-127.317c0-111.744-90.923-202.667-202.667-202.667
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       S0,90.925,0,202.669s90.923,202.667,202.667,202.667c48.213,0,92.48-16.981,127.317-45.184l145.6,145.6
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       c4.16,4.16,9.621,6.251,15.083,6.251s10.923-2.091,15.083-6.251C514.091,497.411,514.091,483.928,505.749,475.587z
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               S0,90.925,0,202.669s90.923,202.667,202.667,202.667c48.213,0,92.48-16.981,127.317-45.184l145.6,145.6
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               c4.16,4.16,9.621,6.251,15.083,6.251s10.923-2.091,15.083-6.251C514.091,497.411,514.091,483.928,505.749,475.587z
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z">
                             </path>
                         </svg>
                         <span class="text-sm font-medium"> Ubah Pencarian </span>
@@ -488,7 +487,7 @@
                         omnis impedit.</div>
                 </div>
                 <div class="grid grid-cols-2 gap-5 mt-10">
-                    @livewire('component.gallery-cars')
+                    @livewire('component.gallery-cars', ['id' => $mobil->id])
                     <div class="flex flex-col">
                         <p class="text-xl font-bold">{{ $mobil->nama_mobil }}</p>
                         <div class="flex mt-2">
@@ -496,10 +495,7 @@
                             <hr class="w-8 h-1 mx-2 my-3 bg-yellow-300 border-0 rounded-lg" />
                             <hr class="w-5 h-1 mx-2 my-3 border-0 rounded-lg bg-neutral-300" />
                         </div>
-                        <div class="mt-2 text-sm text-neutral-600">Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. Veritatis
-                            vitae
-                            doloremque vel dolore quibusdam omnis.</div>
+                        <div class="mt-2 text-sm text-neutral-600">{{ $mobil->deskripsi }}</div>
                         <div class="grid grid-cols-3 gap-4 my-10">
                             <div class="p-3 text-center border rounded-md">
                                 <svg class="m-auto text-center text-indigo-700 size-5" class=""
@@ -549,9 +545,7 @@
                                 <label for="">{{ $mobil->Kategori->kategori_mobil }}</label>
                             </div>
                         </div>
-                        <p class="text-sm text-neutral-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
-                            quo iusto, corporis sit facere
-                            modi vitae hic quas officia nobis?</p>
+                        <p class="text-sm text-neutral-600">{{ $mobil->kategori->deskripsi_kategori }}</p>
                     </div>
                 </div>
                 <div class="w-full h-1 mt-20 rounded-lg bg-neutral-200"></div>
@@ -660,7 +654,7 @@
                             <summary
                                 class="flex items-center justify-between py-4 text-lg font-medium list-none cursor-pointer text-secondary-900">
                                 <h1 id="Syarat dan Ketentuan" class="font-bold text-md">
-                                    Harga Termasuk?
+                                    Harga Belum Termasuk
                                 </h1>
                                 <div class="text-secondary-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -674,16 +668,16 @@
                             <div class="max-w-screen-xl py-2 sm:py-8 lg:py-10">
                                 <div class="grid grid-cols-1 gap-y-8 lg:grid-cols-3 lg:items-center lg:gap-x-16">
                                     <div class="grid grid-cols-2 col-span-2 gap-4 text-sm text-gray-500 sm:grid-cols-2">
-                                        <p>Lorem ipsum dolor sit amet.</p>
-                                        <p>Lorem ipsum dolor sit amet.</p>
-                                        <p>Lorem ipsum dolor sit amet.</p>
-                                        <p>Lorem ipsum dolor sit amet.</p>
-                                        <p>Lorem ipsum dolor sit amet.</p>
-                                        <p>Lorem ipsum dolor sit amet.</p>
+                                        <p>Biaya Driver</p>
+                                        <p>Biaya pengambilan dan pengantaran kendaraan di luar lokasi vendor.</p>
+                                        <p>Bensin, Tol, dan Parkir</p>
+                                        <p>Deposit, e-tilang, dan penggunaan overtime.</p>
+                                        <p>Asuransi kerusakan kendaraan, kehilangan, dan kecelakaan.</p>
+                                        <p>Biaya tambahan jika melewati jarak tempuh maksimum.</p>
                                     </div>
 
                                     <div class="max-w-lg mx-auto text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
-                                        <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                        <img src="{{ url('storage/heroimage/illustrationnotinclude.png') }}"
                                             alt="" class="object-cover rounded-lg size-full" />
 
                                     </div>
@@ -716,104 +710,98 @@
                                 </div>
                             </summary>
                             <div class="prose-sm prose text-gray-500">
-                                <p>Get to Know Me Better</p>
+                                <p>Syarat dan Ketentuan</p>
+                                <ul> Pendaftaran dan Identitas Penyewa
+                                    <li>
+                                        Penyewa harus berusia minimal 18 tahun dan memiliki SIM (Surat Izin Mengemudi) yang
+                                        masih berlaku.
+                                    </li>
+                                    <li>
+                                        Penyewa wajib menyediakan salinan identitas resmi (KTP/SIM/Passport) dan SIM yang
+                                        masih berlaku saat melakukan pendaftaran.
+                                    </li>
+                                    <li>
+                                        Informasi yang disediakan oleh penyewa harus akurat dan lengkap.
+                                    </li>
+                                </ul>
+                                <ul>Ketentuan Penyewaan
+                                    <li>
+                                        Penyewaan mobil dilakukan melalui website dan harus dilakukan minimal 24 jam sebelum
+                                        waktu pengambilan.
+                                    </li>
+                                    <li>
+                                        Penyewa wajib memilih jenis mobil yang tersedia sesuai dengan kebutuhan dan
+                                        melakukan pembayaran sesuai dengan tarif yang ditentukan.
+                                    </li>
+                                </ul>
+                                <ul>Pembayaran
+                                    <li>
+                                        Semua pembayaran yang sudah dilakukan tidak dapat dikembalikan, kecuali dalam
+                                        kondisi tertentu yang diatur dalam kebijakan pengembalian dana.
+                                    </li>
+                                </ul>
+                                <ul>Pengambilan dan Pengembalian Mobil
+                                    <li>
+                                        Penyewa bertanggung jawab untuk memeriksa kondisi mobil sebelum pengambilan dan
+                                        melaporkan kerusakan atau cacat yang ada kepada pihak rental.
+                                    </li>
+                                </ul>
+                                <ul> Penggunaan Mobil
+                                    <li>
+                                        Mobil hanya boleh digunakan untuk keperluan pribadi dan tidak boleh digunakan untuk
+                                        tujuan komersial tanpa izin tertulis dari pihak rental.
+                                    </li>
+                                    <li>
+                                        Penyewa dilarang menggunakan mobil untuk kegiatan ilegal atau yang melanggar hukum.
+                                    </li>
+                                    <li>
+                                        Penyewa wajib mematuhi semua peraturan lalu lintas dan hukum yang berlaku selama
+                                        menggunakan mobil.
+                                    </li>
+                                </ul>
+                                <ul> Tanggung Jawab dan Asuransi
+                                    <li>
+                                        Penyewa bertanggung jawab penuh atas segala kerusakan atau kehilangan mobil selama
+                                        masa sewa.
+                                    </li>
+                                    <li>
+                                        Penyewa wajib melaporkan setiap kecelakaan atau kerusakan kepada pihak rental segera
+                                        setelah kejadian.
+                                    </li>
+                                </ul>
+                                <ul>Pembatalan dan Pengembalian Dana
+                                    <li>
+                                        Pembatalan penyewaan harus dilakukan minimal 24 jam sebelum waktu pengambilan untuk
+                                        mendapatkan pengembalian dana penuh.
+                                    </li>
+                                    <li>
+                                        Pembatalan yang dilakukan kurang dari 24 jam sebelum waktu pengambilan akan
+                                        dikenakan biaya pembatalan sebesar 50% dari total biaya sewa.
+                                    </li>
+                                </ul>
+                                <ul>Sanksi dan Denda
+                                    <li>
+                                        Keterlambatan pengembalian mobil akan dikenakan denda sesuai dengan tarif per jam
+                                        yang berlaku.
+                                    </li>
+                                    <li>
+                                        Segala bentuk pelanggaran terhadap syarat dan ketentuan ini dapat mengakibatkan
+                                        sanksi, termasuk pelarangan untuk menyewa di masa depan
+                                    </li>
+                                </ul>
                                 <ul>
                                     <li>
-                                        I was born in the vibrant city of London in the 1980s, at St Thomas’
-                                        Hospital Medical School. My cultural background is a beautiful blend
-                                        of Italian from my father's side and Spanish from my mother's side.
+                                        Pihak rental berhak untuk mengubah syarat dan ketentuan ini kapan saja dengan
+                                        pemberitahuan melalui website.
                                     </li>
                                     <li>
-                                        My childhood was split between the enchanting landscapes of northern
-                                        Italy and the sunny coasts of southern Spain.
-                                    </li>
-                                    <li>
-                                        Growing up, I called various places home, including Borgosesia in
-                                        Vercelli, Italy, Gorliz and Bilbao in Spain, and Torrevieja in
-                                        Alicante, Spain.
-                                    </li>
-                                    <li>
-                                        Since a young age, I've been captivated by the art of drawing cars,
-                                        allowing my imagination to roam freely on paper.
-                                    </li>
-                                    <li>
-                                        Surfing has been a lifelong passion of mine, instilling in me a deep
-                                        connection with nature and the ocean's boundless energy.
-                                    </li>
-                                    <li>
-                                        Being raised in a multilingual environment, I am fluent in Castilian
-                                        Spanish, English, Italian, and even Swedish, enriching my cultural
-                                        experiences and communication skills.
-                                    </li>
-                                    <li>
-                                        During my youth, I served as a lifeguard on the picturesque Spanish
-                                        coast, embracing the responsibility of ensuring beach safety and
-                                        fostering a sense of community.
-                                    </li>
-                                    <li>
-                                        In my early twenties, I embarked on a journey of self-discovery and
-                                        adventure, moving to Harrogate in the United Kingdom to explore life
-                                        in a different cultural setting.
-                                    </li>
-                                    <li>
-                                        Seeking the warmth and familiarity of my homeland, I eventually
-                                        returned to Spain, cherishing the sunshine and vibrant lifestyle
-                                        that I missed dearly.
-                                    </li>
-                                    <li>
-                                        The desire for new experiences and challenges led me and my wife to
-                                        relocate to the enchanting city of Helsinki, Finland, in 2011, where
-                                        we discovered a thriving tech scene and a welcoming community.
-                                    </li>
-                                    <li>
-                                        Currently, I reside in the picturesque Åland Islands, surrounded by
-                                        the serene beauty of nature and the innovative spirit of the local
-                                        community.
-                                    </li>
-                                    <li>
-                                        My greatest joys in life come from being a dedicated father and
-                                        husband, cherishing every moment spent with my loving family.
-                                    </li>
-                                    <li>
-                                        My journey into web development was sparked by a simple curiosity –
-                                        tweaking settings on my Android phone ignited a passion for coding
-                                        and design that continues to drive me forward.
-                                    </li>
-                                    <li>
-                                        In 2018, I launched my first project, Colors and Fonts, a platform
-                                        dedicated to inspiring designers and developers with beautiful color
-                                        palettes and typography combinations.
-                                    </li>
-                                    <li>
-                                        Despite facing challenges, including working on projects with a
-                                        failing laptop screen, I persevered and saw two of my creations
-                                        acquired in 2022, fueling my determination and ambition.
-                                    </li>
-                                    <li>
-                                        The year 2022 marked the beginning of new ventures, as I founded
-                                        Lexington Themes and Windstatic, platforms aimed at empowering
-                                        creators and simplifying web development processes. Both projects
-                                        officially launched in February 2023, marking a significant
-                                        milestone in my journey.
-                                    </li>
-                                    <li>
-                                        I am deeply inspired by simplicity and clarity in design, striving
-                                        to incorporate these principles into every aspect of my work and
-                                        life.
-                                    </li>
-                                    <li>
-                                        Consistency has been my guiding principle, shaping my approach to
-                                        web development, project management, and personal growth. It serves
-                                        as a steadfast beacon, ensuring that I remain focused and committed
-                                        to my goals amidst life's ever-changing landscape.
+                                        Penyewa diharapkan untuk memeriksa syarat dan ketentuan secara berkala untuk
+                                        memastikan kesesuaian dengan kebijakan yang terbaru.
                                     </li>
                                 </ul>
                                 <p>
-                                    Reflecting on my journey from the bustling cities of Italy and Spain
-                                    to the tranquil shores of the Åland Islands, I am grateful for the
-                                    experiences that have shaped me into the person I am today. My passion
-                                    for design, development, and entrepreneurship continues to drive me
-                                    forward, propelling me towards new horizons and creative endeavors.
+                                    Segala bentuk perselisihan yang timbul dari penyewaan ini akan diselesaikan secara
+                                    musyawarah untuk mufakat.
                                 </p>
                             </div>
                         </details>
@@ -832,7 +820,19 @@
                                     </svg>
                                 </div>
                             </summary>
-                            <div class="pb-4 text-secondary-500">This is the third item's accordion body.</div>
+                            <div class="prose-sm prose text-gray-500">
+                                <ul><b>Pembatalan dan Pengembalian Dana</b>
+                                    <li>
+                                        Pembatalan penyewaan harus dilakukan minimal 24 jam sebelum waktu pengambilan untuk
+                                        mendapatkan pengembalian dana penuh.
+                                    </li>
+                                    <li>
+                                        Pembatalan yang dilakukan kurang dari 24 jam sebelum waktu pengambilan akan
+                                        dikenakan
+                                        biaya pembatalan sebesar 50% dari total biaya sewa.
+                                    </li>
+                                </ul>
+                            </div>
                         </details>
                     </div>
                 </section>

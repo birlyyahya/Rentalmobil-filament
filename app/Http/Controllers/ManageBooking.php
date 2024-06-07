@@ -37,12 +37,9 @@ class ManageBooking extends BaseController
             ->first();
 
 
-
         if ($booking) {
-            // Reservasi ditemukan, redirect ke route invoice.show dengan parameter noinvoice
             return redirect()->route('invoice.show', ['invoice' => $noinvoice]);
         } else {
-            // Reservasi tidak ditemukan, mungkin menampilkan pesan error atau melakukan tindakan lainnya
             return redirect()->back()->with('error', 'invalid');
         }
     }
@@ -82,7 +79,6 @@ class ManageBooking extends BaseController
         $pdf = Pdf::loadView('invoicepdf', compact('kode_transaksi', 'data', 'order_id', 'transaction_id','convertImage'))->setPaper('A4','potrait')->setOptions(['defaultFont' => 'sans-serif']);
 
         return $pdf->download();
-
 
         // Tambahkan order_id dan transaction_id ke data yang dikirim ke view
         // return view("invoicepdf", compact('kode_transaksi', 'data', 'order_id', 'transaction_id'));

@@ -745,28 +745,28 @@
                                 </div>
                                 <div class="flex items-center p-2 space-x-2 border-b-2 rounded hover:bg-gray-100">
                                     <input type="radio" id="mandiriva" name="payment" wire:model='form.payment'
-                                        value="mandiriva"
+                                        value="mandiri"
                                         class="w-4 h-4 border-gray-300 rounded-full shadow-sm text-primary-600 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400" />
                                     <label for="mandiriva" class="flex w-full space-x-3 font-bold text-md"> Mandiri
                                         Virtual Account </label>
                                 </div>
                                 <div class="flex items-center p-2 space-x-2 border-b-2 rounded hover:bg-gray-100">
                                     <input type="radio" id="bcava" name="payment" wire:model='form.payment'
-                                        value="bcava"
+                                        value="bca_va"
                                         class="w-4 h-4 border-gray-300 rounded-full shadow-sm text-primary-600 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400" />
                                     <label for="bcava" class="flex w-full space-x-3 font-bold text-md"> BCA Virtual
                                         Account</label>
                                 </div>
                                 <div class="flex items-center p-2 space-x-2 border-b-2 rounded hover:bg-gray-100">
                                     <input type="radio" id="briva" name="payment" wire:model='form.payment'
-                                        value="briva"
+                                        value="bri_va"
                                         class="w-4 h-4 border-gray-300 rounded-full shadow-sm text-primary-600 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400" />
                                     <label for="briva" class="flex w-full space-x-3 font-bold text-md"> BRI Virtual
                                         Account</label>
                                 </div>
                                 <div class="flex items-center p-2 space-x-2 border-b-2 rounded hover:bg-gray-100">
                                     <input type="radio" id="bniva" name="payment" wire:model='form.payment'
-                                        value="bniva"
+                                        value="bni_va"
                                         class="w-4 h-4 border-gray-300 rounded-full shadow-sm text-primary-600 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400" />
                                     <label for="bniva" class="flex w-full space-x-3 font-bold text-md"> BNI Virtual
                                         Account</label>

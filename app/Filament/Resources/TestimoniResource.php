@@ -2,27 +2,32 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TestimoniResource\Pages;
-use App\Filament\Resources\TestimoniResource\RelationManagers;
-use App\Models\Testimoni;
 use Filament\Forms;
+use Filament\Tables;
+use App\Models\Mobil;
+use App\Models\Customer;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\Grid;
-use Filament\Infolists\Components\Group;
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\Split;
-use Filament\Infolists\Components\TextEntry;
+use App\Models\Reservasi;
+use App\Models\Testimoni;
+use Filament\Tables\Table;
+use App\Models\Reservasi_detail;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
-use Filament\Tables;
-use Filament\Tables\Table;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\Group;
+use Filament\Infolists\Components\Split;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Mokhosh\FilamentRating\Columns\RatingColumn;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
 use Mokhosh\FilamentRating\Components\Rating;
 use Mokhosh\FilamentRating\Entries\RatingEntry;
+use Mokhosh\FilamentRating\Columns\RatingColumn;
+use App\Filament\Resources\TestimoniResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TestimoniResource\RelationManagers;
+use App\Filament\Resources\ReservasiResource\Widgets\ReservasiOverview;
 
 class TestimoniResource extends Resource
 {
@@ -40,12 +45,29 @@ class TestimoniResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('customer_id')
+                Forms\Components\Select::make('customer_id')
+                    ->relationship('customer', 'nama_lengkap')
+                    ->options(function () {
+                        return Customer::whereIn('id', Reservasi::pluck('customer_id'))
+                            ->pluck('nama_lengkap', 'id');
+                    })
                     ->required()
-                    ->numeric(),
-                Forms\Components\Select::make('mobil')
-                    ->disabled()
-                    ->relationship(name: 'mobil', titleAttribute: 'nama_mobil'),
+                    ->reactive() // Tambahkan ini untuk memicu perubahan saat customer dipilih
+                    ->afterStateUpdated(fn ($set) => $set('mobil_id', null)), // Reset mobil_id ketika customer berubah
+
+                Forms\Components\Select::make('mobil_id')
+                    ->label('Mobil')
+                    ->options(function ($get) {
+                        $customerId = $get('customer_id');
+                        if ($customerId) {
+                            return Mobil::whereIn('id', Reservasi_detail::whereHas('reservasi', function ($query) use ($customerId) {
+                                $query->where('customer_id', $customerId);
+                            })->pluck('mobil_id'))
+                                ->pluck('nama_mobil', 'id');
+                        }
+                        return Mobil::pluck('nama_mobil', 'id'); // Default jika tidak ada customer yang dipilih
+                    })
+                    ->required(),
                 Rating::make('rating')
                     ->required(),
                 Forms\Components\RichEditor::make('keterangan')
@@ -68,7 +90,8 @@ class TestimoniResource extends Resource
                     ->stars(5)
                     ->color('warning'),
                 Tables\Columns\TextColumn::make('keterangan')
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(30),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

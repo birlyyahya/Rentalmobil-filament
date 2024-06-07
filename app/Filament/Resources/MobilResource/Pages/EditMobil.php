@@ -45,6 +45,7 @@ class EditMobil extends EditRecord
     }
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        $data['harga_sewa'] = intval(str_replace(',', '',$data['harga_sewa']));;
         $record->update($data);
 
         $hasil = galleri::where('mobil_id', $record->id)

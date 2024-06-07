@@ -126,14 +126,14 @@ class Reservasi extends Component
         $customer->setRememberToken(Str::random(60));
         $customer->save();
 
-        $this->create_reservasi();
+        $this->create_reservasi($customer->id);
     }
     #[On('create_reservasi')]
-    public function create_reservasi()
+    public function create_reservasi($id)
     {
         $data = [
-            'customer_id' => Auth::guard('members')->user()->id,
-            'kode_transaksi' => Auth::guard('members')->user()->id . mt_rand(100, 9999),
+            'customer_id' => $id,
+            'kode_transaksi' => $id . mt_rand(100, 9999),
             'total_bayar' => $this->totalPajak,
             'status_reservasi' => 'pending',
             'status_pembayaran' => 'unpaid',
@@ -176,7 +176,14 @@ class Reservasi extends Component
         $tanggalAmbil = Carbon::parse($this->keyword['keyword']['tanggalAmbil']);
         $tanggalkembali = Carbon::parse($this->keyword['keyword']['tanggalKembali']);
 
-        return $tanggalAmbil->diffInDays($tanggalkembali);
+        $hasil = $tanggalAmbil->diffInDays($tanggalkembali);
+
+        if($hasil == 0){
+            return '1';
+        }{
+            return $hasil;
+
+        }
     }
 
     public function addcart()

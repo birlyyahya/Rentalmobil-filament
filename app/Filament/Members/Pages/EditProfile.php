@@ -302,7 +302,6 @@ class EditProfile extends Page implements HasForms
                                                     'KTP' => 'KTP',
                                                     'SIM' => 'SIM'
                                                 ])
-                                                ->required()
                                                 ->default('KTP')
                                                 ->selectablePlaceholder(false)
                                         ),

@@ -46,14 +46,12 @@ class ReservasiResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('kode_transaksi')
-                    ->required()
                     ->label('Kode Transaksi')
                     ->disabled(),
-                Forms\Components\Select::make('customer.id')
+                Forms\Components\Select::make('customer_id')
                     ->relationship('customer', 'nama_lengkap')
                     ->options(Customer::pluck('nama_lengkap', 'id'))
                     ->required(),
-
                 Forms\Components\TextInput::make('total_bayar')
                     ->required()
                     ->numeric(),
@@ -87,6 +85,7 @@ class ReservasiResource extends Resource
                         'expired' => 'Expired',
                         'refund' => 'Refund',
                     ])
+                    ->default('paid')
                     ->selectablePlaceholder(false),
                 Forms\Components\Textarea::make('keterangan')
                     ->required()
@@ -95,7 +94,11 @@ class ReservasiResource extends Resource
                     ->formatStateUsing(function ($state) {
                         $keterangan = json_decode($state, true);
                         if ($keterangan == !NULL) {
-                            return $keterangan['type'] . '-' . $keterangan['number'] . ',' . $keterangan['name'] . ' ' . $keterangan['expirationDate'];
+                            if(empty($keterangan['type'])){
+                                return $keterangan;
+                            }else {
+                                return $keterangan['type'] . '-' . $keterangan['number'] . ',' . $keterangan['name'] . ' ' . $keterangan['expirationDate'];
+                            }
                         } else {
                             return $state;
                         }
@@ -161,7 +164,7 @@ class ReservasiResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->searchable()
-                    ->wrap()
+                    ->limit(30)
                     ->formatStateUsing(function (string $state): string {
                         // Split the state by comma to get individual entries
                         $entries = explode(',', $state);

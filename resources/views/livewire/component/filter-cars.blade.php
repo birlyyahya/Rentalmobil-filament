@@ -117,9 +117,9 @@
                             <li>
                                 <label class="inline-flex items-center gap-2">
                                     <input type="checkbox" wire:model="filterKapasitas" name="filterKapasitas"
-                                        value="8" wire:change="getCategoryCars"
+                                        value="7" wire:change="getCategoryCars"
                                         class="border-gray-300 rounded size-5">
-                                    <span class="text-sm font-medium text-gray-700">8 Seats </span>
+                                    <span class="text-sm font-medium text-gray-700">7 Seats </span>
                                 </label>
                             </li>
 
@@ -248,9 +248,9 @@
             <article class="bg-white border-2 border-gray-100 shadow-md rounded-xl">
                 <div class="relative flex flex-col items-start gap-4 lg:flex-row">
                     <a href="{{ route('katalog.show', ['id' => $mobs->id, 'tanggalAmbil' => $keyword['tanggalAmbil'], 'tanggalKembali' => $keyword['tanggalKembali'], 'waktu' => $keyword['waktu']]) }}"
-                        class="block shrink-0 max-w-30 lg:max-w-80">
+                        class="block shrink-0 max-w-30 lg:max-w-80" style="width:350px;">
                         <img alt=""
-                            src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            src="  {{ 'storage/'.$mobs->galleri->first()->image }}"
                             class="object-cover w-full rounded-md lg:h-60" />
                     </a>
 

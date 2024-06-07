@@ -5,7 +5,7 @@
 
     {{-- Hero title --}}
     <section id="home"
-        class="bg-[url(https://images.unsplash.com/photo-1604014237800-1c9102c219da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80)] bg-cover bg-center bg-fixed bg-no-repeat relative">
+        class="bg-[url('http://127.0.0.1:8000/storage/heroimage/heroimage.jpg')] bg-cover bg-center bg-fixed bg-no-repeat relative">
         <div class="bg-black/25">
 
             <div class="relative h-full max-w-6xl px-8 mx-auto py-36 md:px-12 lg:pt-24 lg:px-32 ">
@@ -64,8 +64,7 @@
     </section>
 
     {{-- Best Deals --}}
-
-    <livewire:homepage.mobil-offer-today />
+            <livewire:homepage.mobil-offer-today />
 
     @livewire('homepage.testimonial')
     {{-- faq --}}
@@ -83,61 +82,52 @@
                 <div class="flex flex-col gap-6 text-base text-gray-400 lg:col-span-2">
                     <details>
                         <summary class="text-base font-medium tracking-tight text-gray-900">
-                            What does Jamstack entail?
+                            Bagaimana prosedur terjadinya kecelakaan atau kerusakan?
                         </summary>
                         <p class="pt-4 text-sm text-gray-500">
-                            JAMstack is an innovative approach to web development that stands
-                            for JavaScript, APIs, and Markdown. It's all about creating faster
-                            websites with improved SEO rankings and a better overall user
-                            experience.
+                            Mohon hubungi perusahaan rental dan polisi segera, jika mobil dicuri, rusak parah, atau rusak
+                            akibat kecelakaan dengan pihak lain. Anda akan bertanggung jawab sepenuhnya untuk biaya
+                            penggantian/perbaikan mobil jika Anda tidak bisa menunjukkan dokumen yang diperlukan dari
+                            polisi. Mohon hubungi perusahaan rental segera jika kerusakan kecil dialami mobil dan tidak
+                            melibatkan pihak lain.
+                            <br>
+                            Perusahaan rental mobil tidak bertanggung jawab atas kehilangan/pencurian/kerusakan
+                            barang-barang di dalam mobil, selama atau setelah rental.
+                            <br>
+                            Kerusakan pada mobil akan dikenakan biaya oleh perusahaan persewaan mobil setelah mobil
+                            dikembalikan dan akan dikenai biaya administrasi kerusakan sebagai daftar teratas pada jumlah
+                            yang dikurangi dari lebihan.
+                            <br>
+                            Tidak termasuk dalam pertanggungan rental (CDW & TP)
+                            Kehilangan/pencurian/kerusakan pada: kunci, antena, dongkrak, segitiga pengaman dan rompi, wiper
+                            kaca depan, tutup bensin, penutup bagasi, atau komponen mobil tetap atau bergerak lainnya.
                         </p>
                     </details>
                     <details>
                         <summary class="text-base font-medium tracking-tight text-gray-900">
-                            What coding languages ?
+                            Tidak termasuk dalam harga rental
                         </summary>
                         <p class="pt-4 text-sm text-gray-500">
-                            We utilize a range of modern technologies and languages to create
-                            your websites, including HTML, CSS, JavaScript, and various
-                            frameworks like React or Vue.js. Additionally, we work with headless
-                            Content Management Systems (CMS) and APIs to manage content
-                            efficiently.
+                        <ul>
+                            <li>Biaya Daerah</li>
+                            <li>Bensin</li>
+                            <li>Parkir</li>
+                            <li>Supir</li>
+                            <li>Kehilangan atau kerusakan</li>
+                            <li>Tanggung Gugat Pihak Ketiga (TPL)</li>
+                        </ul>
                         </p>
                     </details>
                     <details>
                         <summary class="text-base font-medium tracking-tight text-gray-900">
-                            How fast will I get my coded website?
+                            Apa yang dibutuhkan saat pengambilan?
                         </summary>
                         <p class="pt-4 text-sm text-gray-500">
-                            The speed of delivery depends on the complexity of your project and
-                            your specific requirements. We aim to provide swift delivery, and
-                            we'll discuss the timeline during our initial consultation. Rest
-                            assured, we're committed to delivering your website as efficiently
-                            as possible.
-                        </p>
-                    </details>
-                    <details>
-                        <summary class="text-base font-medium tracking-tight text-gray-900">
-                            How can I check the progress of my website?
-                        </summary>
-                        <p class="pt-4 text-sm text-gray-500">
-                            We'll set up a convenient communication channel, such as email or a
-                            project management platform, to keep you updated on the progress of
-                            your website. You can communicate with us, ask questions, and
-                            provide feedback through this channel to ensure a smooth
-                            collaboration.
-                        </p>
-                    </details>
-                    <details>
-                        <summary class="text-base font-medium tracking-tight text-gray-900">
-                            If I have a blog, do you count each post as a separate page?
-                        </summary>
-                        <p class="pt-4 text-sm text-gray-500">
-                            The way we structure and charge for your blog pages can vary
-                            depending on your specific needs. Generally, individual blog posts
-                            can be counted as separate pages, but this can be discussed and
-                            tailored to your preferences during our project discussions. We aim
-                            to be flexible and accommodating to meet your requirements.
+                        <ul>
+                            <li>SIM yang utuh dan valid untuk setiap pengemudi</li>
+                            <li>Paspor setiap pengemudi </li>
+                            <li>Informasi valid alamat rumah pengemudi utama</li>
+                        </ul>
                         </p>
                     </details>
                 </div>
@@ -180,6 +170,5 @@
 
         keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
         keenSliderNext.addEventListener('click', () => keenSlider.next())
-
     </script>
 @endsection

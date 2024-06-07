@@ -66,7 +66,7 @@ class Register extends Component
 
         session()->regenerate();
 
-        return redirect()->url('members');
+        return redirect()->to('members');
     }
 
     public function render()

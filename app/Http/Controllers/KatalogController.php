@@ -27,7 +27,7 @@ class KatalogController extends Controller
         $tanggalAmbil = Carbon::parse($tanggalAmbil);
         $tanggalKembali = Carbon::parse($tanggalKembali);
 
-        $mobilTersedia = Mobil::where('status', '!=', 'away') // Pastikan mobil tidak dalam status 'away'
+        $mobilTersedia = Mobil::with('galleri')->where('status', '!=', 'away') // Pastikan mobil tidak dalam status 'away'
         ->whereDoesntHave('reservasi_detail', function ($query) use ($tanggalAmbil, $tanggalKembali) {
             // Pastikan tidak ada reservasi detail yang tumpang tindih dengan rentang tanggal yang dipilih
             $query->where(function ($q) use ($tanggalAmbil, $tanggalKembali) {
@@ -53,11 +53,13 @@ class KatalogController extends Controller
     public function show(mobil $id, $tanggalAmbil, $tanggalKembali, $waktu)
     {
         $data = Testimoni::where('mobil_id', $id->id)->get();
+
         return view('DetailProduk', ['mobil' => $id, 'keyword' => [
             'tanggalAmbil'=> $tanggalAmbil,
             'tanggalKembali'=> $tanggalKembali,
             'waktu'=> $waktu,
 
         ],'review' => $data]);
+
     }
 }

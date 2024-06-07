@@ -19,6 +19,19 @@ class Reservasi extends Model
         'keterangan',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($transaksi) {
+            $latestTransaksi = self::latest()->first();
+            $newId = $latestTransaksi ? $latestTransaksi->id + 1 : 1;
+
+            // Generate kode_transaksi
+            $transaksi->kode_transaksi = $newId . mt_rand(100, 9999);
+        });
+    }
+
     public function getKeteranganAttribute($value)
     {
         return json_decode($value, true);

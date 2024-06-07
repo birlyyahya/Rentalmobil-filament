@@ -50,7 +50,7 @@ class CustomerResource extends Resource
                 Card::make()
                     ->schema([
                         TextInputSelectAffix::make('no_identitas')
-                            ->integer()
+                            ->numeric()
                             ->required()
                             ->maxLength(16)
                             ->minLength(12)

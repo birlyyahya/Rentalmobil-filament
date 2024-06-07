@@ -10,7 +10,7 @@
                         <img class="w-16 rounded-full" src="{{ url('storage/' . $data->customer->avatar) }}" alt="">
                     </div>
                     <div class="flex flex-col space-y-2 text-start">
-                            <h1 class="text-2xl font-bold">Invoice #{{ $data->kode_transaksi }}</h1>
+                        <h1 class="text-2xl font-bold">Invoice #{{ $data->kode_transaksi }}</h1>
                         <div class="flex space-x-2 text-sm text-neutral-600">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="self-end size-5"
                                 id="fi_12253921" data-name="Layer 1" viewBox="0 0 64 64">
@@ -42,7 +42,8 @@
                                 {{ DateTime::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('l, F j, Y \a\t H:i:s') }}
                             </p>
                         </div>
-                        <a href="{{ route('generatePDF',['kode_transaksi' => $data->kode_transaksi]) }}" class="badge badge-accent">Download PDF <x-heroicon-o-printer class="size-5"/></a>
+                        <a href="{{ route('generatePDF', ['kode_transaksi' => $data->kode_transaksi]) }}"
+                            class="badge badge-accent">Download PDF <x-heroicon-o-printer class="size-5" /></a>
                     </div>
                     <div class="p-5 " style="margin-left:auto;">
                         @if ($data->status_pembayaran == 'unpaid')
@@ -96,71 +97,76 @@
                         </div>
                         <div class="flex justify-between pb-2 text-sm border-b-2">
                             <b>Driver :</b>
-                            @if ($data->reservasi_details->driver_id !== null)
-                                <div x-data="{
-                                    tooltipVisible: false,
-                                    tooltipText: '{{ $data->reservasi_details->driver->telp }}',
-                                    tooltipArrow: false,
-                                    tooltipPosition: 'top',
-                                }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; });
-                                $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative">
-                                    <div x-ref="tooltip" x-show="tooltipVisible"
-                                        :class="{
-                                            'top-0 left-1/2 -translate-x-1/2 -mt-0.5 -translate-y-full': tooltipPosition ==
-                                                'top',
-                                            'top-1/2 -translate-y-1/2 -ml-0.5 left-0 -translate-x-full': tooltipPosition ==
-                                                'left',
-                                            'bottom-0 left-1/2 -translate-x-1/2 -mb-0.5 translate-y-full': tooltipPosition ==
-                                                'bottom',
-                                            'top-1/2 -translate-y-1/2 -mr-0.5 right-0 translate-x-full': tooltipPosition ==
-                                                'right'
-                                        }"
-                                        class="absolute w-auto text-sm" x-cloak>
-                                        <div x-show="tooltipVisible" x-transition
-                                            class="relative px-2 py-1 text-white bg-blue-600 rounded-md bg-opacity-90">
-                                            <p x-text="tooltipText" class="flex-shrink-0 block text-xs whitespace-nowrap">
-                                            </p>
-                                            <div x-ref="tooltipArrow" x-show="tooltipArrow"
-                                                :class="{
-                                                    'bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full': tooltipPosition ==
-                                                        'top',
-                                                    'right-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px translate-x-full': tooltipPosition ==
-                                                        'left',
-                                                    'top-0 -translate-x-1/2 left-1/2 w-2.5 -translate-y-full': tooltipPosition ==
-                                                        'bottom',
-                                                    'left-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px -translate-x-full': tooltipPosition ==
-                                                        'right'
-                                                }"
-                                                class="absolute inline-flex items-center justify-center overflow-hidden">
-                                                <div :class="{
-                                                    'origin-top-left -rotate-45': tooltipPosition ==
-                                                        'top',
-                                                    'origin-top-left rotate-45': tooltipPosition ==
-                                                        'left',
-                                                    'origin-bottom-left rotate-45': tooltipPosition ==
-                                                        'bottom',
-                                                    'origin-top-right -rotate-45': tooltipPosition == 'right'
-                                                }"
-                                                    class="w-1.5 h-1.5 transform bg-blue-600 bg-opacity-90"></div>
+                            @if ($data->reservasi_details->biaya_driver !== 0)
+                                @if ($data->reservasi_details->driver_id !== null)
+                                    <div x-data="{
+                                        tooltipVisible: false,
+                                        tooltipText: '{{ $data->reservasi_details->driver->telp }}',
+                                        tooltipArrow: false,
+                                        tooltipPosition: 'top',
+                                    }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; });
+                                    $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative">
+                                        <div x-ref="tooltip" x-show="tooltipVisible"
+                                            :class="{
+                                                'top-0 left-1/2 -translate-x-1/2 -mt-0.5 -translate-y-full': tooltipPosition ==
+                                                    'top',
+                                                'top-1/2 -translate-y-1/2 -ml-0.5 left-0 -translate-x-full': tooltipPosition ==
+                                                    'left',
+                                                'bottom-0 left-1/2 -translate-x-1/2 -mb-0.5 translate-y-full': tooltipPosition ==
+                                                    'bottom',
+                                                'top-1/2 -translate-y-1/2 -mr-0.5 right-0 translate-x-full': tooltipPosition ==
+                                                    'right'
+                                            }"
+                                            class="absolute w-auto text-sm" x-cloak>
+                                            <div x-show="tooltipVisible" x-transition
+                                                class="relative px-2 py-1 text-white bg-blue-600 rounded-md bg-opacity-90">
+                                                <p x-text="tooltipText"
+                                                    class="flex-shrink-0 block text-xs whitespace-nowrap">
+                                                </p>
+                                                <div x-ref="tooltipArrow" x-show="tooltipArrow"
+                                                    :class="{
+                                                        'bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full': tooltipPosition ==
+                                                            'top',
+                                                        'right-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px translate-x-full': tooltipPosition ==
+                                                            'left',
+                                                        'top-0 -translate-x-1/2 left-1/2 w-2.5 -translate-y-full': tooltipPosition ==
+                                                            'bottom',
+                                                        'left-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px -translate-x-full': tooltipPosition ==
+                                                            'right'
+                                                    }"
+                                                    class="absolute inline-flex items-center justify-center overflow-hidden">
+                                                    <div :class="{
+                                                        'origin-top-left -rotate-45': tooltipPosition ==
+                                                            'top',
+                                                        'origin-top-left rotate-45': tooltipPosition ==
+                                                            'left',
+                                                        'origin-bottom-left rotate-45': tooltipPosition ==
+                                                            'bottom',
+                                                        'origin-top-right -rotate-45': tooltipPosition == 'right'
+                                                    }"
+                                                        class="w-1.5 h-1.5 transform bg-blue-600 bg-opacity-90"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            {{ $data->reservasi_details->driver->nama_driver }}
+                                            <div x-ref="content" class="ml-2">
+                                                <svg class="size-4 "height="512" viewBox="0 0 512 512" width="512"
+                                                    xmlns="http://www.w3.org/2000/svg" id="fi_10308619">
+                                                    <g id="Layer_2" data-name="Layer 2">
+                                                        <g id="exclamation">
+                                                            <path
+                                                                d="m256 0c-141.38 0-256 114.62-256 256s114.62 256 256 256 256-114.62 256-256-114.62-256-256-256zm35.83 360.17a35.83 35.83 0 0 1 -35.83 35.83 35.83 35.83 0 0 1 -35.83-35.83 35.83 35.83 0 0 1 35.83-35.83 35.83 35.83 0 0 1 35.83 35.83zm4.76-206.87-4.73 119.44a35.89 35.89 0 0 1 -35.86 34.46 35.89 35.89 0 0 1 -35.86-34.46l-4.73-119.44a35.89 35.89 0 0 1 35.86-37.3h9.46a35.89 35.89 0 0 1 35.86 37.3z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="flex items-center">
-                                        {{ $data->reservasi_details->driver->nama_driver }}
-                                        <div x-ref="content" class="ml-2">
-                                            <svg class="size-4 "height="512" viewBox="0 0 512 512" width="512"
-                                                xmlns="http://www.w3.org/2000/svg" id="fi_10308619">
-                                                <g id="Layer_2" data-name="Layer 2">
-                                                    <g id="exclamation">
-                                                        <path
-                                                            d="m256 0c-141.38 0-256 114.62-256 256s114.62 256 256 256 256-114.62 256-256-114.62-256-256-256zm35.83 360.17a35.83 35.83 0 0 1 -35.83 35.83 35.83 35.83 0 0 1 -35.83-35.83 35.83 35.83 0 0 1 35.83-35.83 35.83 35.83 0 0 1 35.83 35.83zm4.76-206.87-4.73 119.44a35.89 35.89 0 0 1 -35.86 34.46 35.89 35.89 0 0 1 -35.86-34.46l-4.73-119.44a35.89 35.89 0 0 1 35.86-37.3h9.46a35.89 35.89 0 0 1 35.86 37.3z">
-                                                        </path>
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
+                                @else
+                                    <p>Wait Admin Confirmation</p>
+                                @endif
                             @else
                                 <p>Not Using Driver</p>
                             @endif
@@ -312,7 +318,7 @@
                         </table>
                     </div>
                 </div>
-                @livewire('component.testimoni-form',['customer' => $data->customer,'id' =>  $data->reservasi_details->mobil->id])
+                @livewire('component.testimoni-form', ['customer' => $data->customer, 'id' => $data->reservasi_details->mobil->id])
             </div>
             <div class="w-full h-auto col-span-2 space-x-3">
                 <div class="p-5 border border-2 rounded-lg">
@@ -339,7 +345,7 @@
                         <hr class="border border-2 rounded-lg shadow-sm border-neutral-200/70">
                         <div class="flex justify-between">
                             <p class="text-sm text-neutral-600">Total Harga</p>
-                            <p class="text-lg font-bold">{{ Number::currency($data->total_bayar , 'IDR') }}</p>
+                            <p class="text-lg font-bold">{{ Number::currency($data->total_bayar, 'IDR') }}</p>
                         </div>
                     </div>
                     <div class="w-full px-5 py-4 mt-10 mb-5 bg-blue-500 rounded-lg">

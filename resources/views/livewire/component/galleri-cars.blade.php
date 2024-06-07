@@ -1,5 +1,5 @@
 <div class="flex-shrink-0">
-    <div x-data="photoGalleryApp" class="flex flex-col max-w-xl">
+    <div x-data="photoGalleryApp({{ $this->galleri->pluck('image') }})" class="flex flex-col max-w-xl">
         <div class="flex items-center sm:h-80">
             <div :class="{ 'cursor-not-allowed opacity-50': !hasPrevious() }" class="hidden cursor-pointer sm:block">
                 <svg version="1.0" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -9,7 +9,7 @@
                 </svg>
             </div>
             <div class="flex justify-center w-full sm:w-108">
-                <img x-ref="mainImage" class="w-full sm:w-auto sm:h-80" src="" loading="lazy" />
+                <img x-ref="mainImage" class="object-cover w-full sm:h-80" src="" loading="lazy" />
             </div>
             <div :class="{ 'cursor-not-allowed opacity-50': !hasNext() }" class="hidden cursor-pointer sm:block">
                 <svg version="1.0" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -20,28 +20,19 @@
             </div>
         </div>
         <div class="flex justify-center mt-1 space-x-1">
-            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/58049699/square.jpg"
-                :class="{ 'ring-2 opacity-50': currentPhoto == 0 }" class="w-16 h-16" x-on:click="pickPhoto(0)">
-            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/100821385/square.jpg"
-                :class="{ 'ring-2 opacity-50': currentPhoto == 1 }" class="w-16 h-16" x-on:click="pickPhoto(1)">
-            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/75873313/square.jpg"
-                :class="{ 'ring-2 opacity-50': currentPhoto == 2 }" class="w-16 h-16" x-on:click="pickPhoto(2)">
-            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/65267550/square.jpg"
-                :class="{ 'ring-2 opacity-50': currentPhoto == 3 }" class="w-16 h-16" x-on:click="pickPhoto(3)">
+            @foreach ($this->galleri as $index => $galleri)
+                <img src="{{ url('storage/'.$galleri->image) }}"
+                    :class="{ 'ring-2 opacity-50': currentPhoto == {{ $index }} }" class="object-cover w-20 h-16" x-on:click="pickPhoto({{ $index }})">
+            @endforeach
         </div>
     </div>
 </div>
 
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('photoGalleryApp', () => ({
+        Alpine.data('photoGalleryApp', (images) => ({
             currentPhoto: 0,
-            photos: [
-                "https://inaturalist-open-data.s3.amazonaws.com/photos/58049699/medium.jpg",
-                "https://inaturalist-open-data.s3.amazonaws.com/photos/100821385/medium.jpg",
-                "https://inaturalist-open-data.s3.amazonaws.com/photos/75873313/medium.jpg",
-                "https://inaturalist-open-data.s3.amazonaws.com/photos/65267550/medium.jpg",
-            ],
+            photos: images.map(image => `{{ url('storage') }}/${image}`),
             init() {
                 this.changePhoto();
             },

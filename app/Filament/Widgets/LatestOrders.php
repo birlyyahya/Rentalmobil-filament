@@ -83,7 +83,11 @@ class LatestOrders extends BaseWidget
 
                         $keterangan = json_decode($state, true);
                         if ($keterangan == !NULL) {
-                            return $keterangan['type'] . '-' . $keterangan['number'] . ',' . $keterangan['name'] . ' ' . $keterangan['expirationDate'];
+                            if (empty($keterangan['type'])) {
+                                return $keterangan;
+                            } else {
+                                return $keterangan['type'] . '-' . $keterangan['number'] . ',' . $keterangan['name'] . ' ' . $keterangan['expirationDate'];
+                            }
                         } else {
                             return $state;
                         }

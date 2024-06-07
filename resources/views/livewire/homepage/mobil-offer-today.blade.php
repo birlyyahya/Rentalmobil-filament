@@ -1,5 +1,5 @@
 <section class="bg-gray-50" wire:ignore>
-    <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+    <div class="px-4 py-12 mx-auto ml-0 max-w-screen sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-16">
         <div class="items-end justify-between max-w-7xl sm:flex sm:pe-6 lg:pe-8">
             <h2 class="max-w-xl font-bold tracking-tight text-gray-900 text-1xl sm:text-4xl">
                 Best Offers Today
@@ -27,11 +27,12 @@
         <div class="mt-8 -mx-6 lg:col-span-2 lg:mx-0">
             <div id="keen-slider" class="keen-slider">
                 @foreach ($mobil as $item)
+
                     <div class="keen-slider__slide" style="max-width: 460px !important; min-width:400px !important;">
                         <blockquote class="flex flex-col justify-between h-full p-6 bg-white shadow-sm sm:p-8 lg:p-5">
-                            <a href="#" class="block rounded-lg">
+                            <a href="{{ route('katalog.show',['id' => $item->id,'tanggalAmbil' => $this->tanggalAmbil,'tanggalKembali' => $this->tanggalKembali,'waktu' => $this->waktu]) }}" class="block rounded-lg">
                                 <img alt=""
-                                    src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                    src="{{ 'storage/'.$item->galleri->first()->image }}"
                                     class="object-cover w-full h-56 rounded-md" />
 
                                 <div class="mt-4">

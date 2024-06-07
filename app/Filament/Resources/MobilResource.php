@@ -79,14 +79,13 @@ class MobilResource extends Resource
                             ->required()
                             ->selectablePlaceholder(false)
                             ->options([
-                                'pertamaxturbo' => 'Pertamax Turbo',
-                                'pertamax' => 'Pertamax',
-                                'pertalite' => 'Pertalite',
-                                'pertaminadex' => 'Pertamina Dex',
-                                'dexlite' => 'Dexlite',
-                                'solar' => 'Solar',
+                                'bensin' => 'Bensin',
+                                'diesel' => 'Diesel',
+                                'Solar' => 'Solar',
+                                'electric' => 'Electric',
+                                'hybrid' => 'hybrid',
                             ])
-                            ->default('pertamax'),
+                            ->default('bensin'),
                         Forms\Components\Select::make('transmisi')
                             ->required()
                             ->selectablePlaceholder(false)
@@ -105,8 +104,7 @@ class MobilResource extends Resource
                             ->prefix('Rp')
                             ->mask(RawJs::make(<<<'JS'
                              $money($input,'.')
-                            JS))
-                            ->numeric(),
+                            JS)),
                         Forms\Components\Select::make('status')
                             ->required()
                             ->options([
@@ -152,13 +150,15 @@ class MobilResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('jenis_bbm')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('deskripsi')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('harga_sewa')
                     ->money('IDR')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge(),
+                Tables\Columns\TextColumn::make('deskripsi')
+                    ->searchable()
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

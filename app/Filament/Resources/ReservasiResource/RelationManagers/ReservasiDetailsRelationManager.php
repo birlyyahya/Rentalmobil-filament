@@ -24,7 +24,10 @@ class ReservasiDetailsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\Select::make('mobil_id')
-                    ->relationship('mobil', 'nama_mobil'),
+                    ->relationship('mobil', 'nama_mobil')
+                    ->options(function () {
+                        return Mobil::where('status', '!=', 'away')->pluck('nama_mobil', 'id');
+                    }),
                 Forms\Components\TextInput::make('tujuan')
                     ->required(),
                 Forms\Components\DatePicker::make('tanggal_ambil')
@@ -58,15 +61,11 @@ class ReservasiDetailsRelationManager extends RelationManager
                     ->inline(),
                 Forms\Components\TextInput::make('biaya_sewa')
                     ->prefix('Rp ')
-                    ->mask(RawJs::make(<<<'JS'
-                    $money($input)
-                    JS))
+                    ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('biaya_driver')
                     ->prefix('Rp ')
-                    ->mask(RawJs::make(<<<'JS'
-                    $money($input,'.')
-                    JS))
+                    ->numeric()
                     ->required(),
 
             ]);
@@ -97,6 +96,10 @@ class ReservasiDetailsRelationManager extends RelationManager
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->label('Create Reservasi Detail'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()

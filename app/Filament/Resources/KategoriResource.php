@@ -41,7 +41,7 @@ class KategoriResource extends Resource
             ->schema([
                 TextInput::make('kategori_mobil')
                     ->required()
-                    ->reactive()
+                    ->live()
                     ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
                         if (($get('kategori_slug') ?? '') !== Str::slug($old)) {
                             return;
