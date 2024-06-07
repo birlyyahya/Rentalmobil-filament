@@ -25,7 +25,7 @@
 </div>
 
 <div id="keen-slider" class="max-w-3xl mt-10 keen-slider">
-    @forelse ($review as $test)
+    @fodrelse ($review as $test)
         <div class="keen-slider__slide">
             <blockquote class="p-6 rounded-lg shadow-sm bg-gray-50 sm:p-8">
                 <div class="flex items-center gap-4">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <p class="mt-4 text-sm text-gray-700">
-                    {{ $test->keterangan }}
+                    {!! $test->keterangan !!}
                 </p>
             </blockquote>
         </div>

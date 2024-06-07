@@ -636,7 +636,7 @@
                                         </div>
                                     </div>
                                     <p class="mt-4 text-sm text-gray-700">
-                                        {{ $test->keterangan }}
+                                        {!! $test->keterangan !!}
                                     </p>
                                 </blockquote>
                             </div>
